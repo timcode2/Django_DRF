@@ -4,6 +4,11 @@ from django.db import models
 from main.models import NULLABLE
 
 
+class Roles(models.TextChoices):
+    MODERATOR = 'moder'
+    USER = 'user'
+
+
 class User(AbstractUser):
     username = None
 
@@ -12,6 +17,8 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='users/', verbose_name='Аватарка', **NULLABLE)
 
     email = models.EmailField(unique=True, verbose_name='email')
+
+    # role = models.CharField(max_length=15, choices=Roles.choices, default=Roles.USER, verbose_name='Роль')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

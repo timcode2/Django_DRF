@@ -9,6 +9,8 @@ class Course(models.Model):
     image = models.ImageField(upload_to='courses/', verbose_name='превью курса', **NULLABLE)
     description = models.TextField(verbose_name='описание курса')
 
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='владелец', **NULLABLE)
+
     def __str__(self):
         return f'{self.name}'
 
@@ -24,6 +26,7 @@ class Lesson(models.Model):
     video_link = models.URLField(verbose_name='ссылка на видео')
 
     course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курсы', **NULLABLE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='владелец', **NULLABLE)
 
     def __str__(self):
         return f'{self.name}'

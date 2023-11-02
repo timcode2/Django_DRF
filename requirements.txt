@@ -24,3 +24,4 @@ stack-data==0.6.3
 traitlets==5.11.2
 wcwidth==0.2.8
 django-filter==23.3
+djangorestframework-simplejwt

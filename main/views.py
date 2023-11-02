@@ -13,6 +13,7 @@ class CourseViewSet(viewsets.ModelViewSet):
 
 class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
+    # permission_classes = [~IsModerator]
 
 
 class LessonListAPIView(generics.ListAPIView):
@@ -28,10 +29,12 @@ class LessonRetrieveAPIView(generics.RetrieveAPIView):
 class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
+    # permission_classes = [IsOwner | IsModerator]
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
+    # permission_classes = [IsOwner]
 
 
 class PaymentListAPIView(generics.ListAPIView):
