@@ -4,7 +4,7 @@ from rest_framework import viewsets, generics
 
 from main.models import Course, Lesson, Payment, Subscription
 from main.paginators import CoursePaginator, LessonPaginator
-from main.permissions import IsModerator, IsOwner
+from main.permissions import IsModerator, IsOwner, IsSubscriber
 from main.serializers import CourseSerializer, LessonSerializer, PaymentSerializer, SubscriptionSerializer
 
 
@@ -71,17 +71,11 @@ class SubscriptionCreateAPIView(generics.CreateAPIView):
     def perform_create(self, serializer, **kwargs):
         new_subscription = serializer.save()
         new_subscription.user = self.request.user
-        new_subscription.course = Course.objects.get(id=self.kwargs['pk'])
         new_subscription.save()
 
 
 class SubscriptionDestroyAPIView(generics.DestroyAPIView):
     queryset = Subscription.objects.all()
-
-    def perform_destroy(self, instance, **kwargs):
-
-        user = self.request.user
-        subscription = Subscription.objects.get(course_id=self.kwargs['pk'], user=user)
-        subscription.delete()  # удаляем подписку
+    permission_classes = [IsSubscriber]
 
 
