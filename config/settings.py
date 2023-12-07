@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'users',
     'main',
-    'django_filters'
+    'django_filters',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,5 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ]
 }
+
+STRIPE_SECRET_KEY = 'sk_test_51OKilkD8x3azpc2deFHijYmNxGp52PIFjPorsaKbmWnuICBUxwLBAmVMJFlmMyNLc68AWUanKR1ePoOY7bHI74Xm00gXVJDDIw'
